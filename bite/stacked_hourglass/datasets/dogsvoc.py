@@ -21,12 +21,12 @@ from pycocotools.mask import decode as decode_RLE
 
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', '..'))
-from src.configs.data_info import COMPLETE_DATA_INFO_24
-from src.stacked_hourglass.utils.imutils import load_image, draw_labelmap, draw_multiple_labelmaps
-from src.stacked_hourglass.utils.misc import to_torch
-from src.stacked_hourglass.utils.transforms import shufflelr, crop, color_normalize, fliplr, transform
-import src.stacked_hourglass.datasets.utils_stanext as utils_stanext 
-from src.stacked_hourglass.utils.visualization import save_input_image_with_keypoints
+from bite.configs.data_info import COMPLETE_DATA_INFO_24
+from bite.stacked_hourglass.utils.imutils import load_image, draw_labelmap, draw_multiple_labelmaps
+from bite.stacked_hourglass.utils.misc import to_torch
+from bite.stacked_hourglass.utils.transforms import shufflelr, crop, color_normalize, fliplr, transform
+import bite.stacked_hourglass.datasets.utils_stanext as utils_stanext 
+from bite.stacked_hourglass.utils.visualization import save_input_image_with_keypoints
 
 
 

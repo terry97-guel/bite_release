@@ -1,3 +1,5 @@
+# %%
+video_name = "1"
 
 import argparse
 import os.path
@@ -23,7 +25,7 @@ import cv2
 import shutil
 import random
 from datetime import datetime
-import gradio as gr
+# import gradio as gr
 
 import torchvision
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
@@ -33,28 +35,28 @@ from pytorch3d.loss import mesh_edge_loss, mesh_laplacian_smoothing, mesh_normal
 
 
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'bite'))
 
-from combined_model.train_main_image_to_3d_wbr_withref import do_validation_epoch
-from combined_model.model_shape_v7_withref_withgraphcnn import ModelImageTo3d_withshape_withproj 
+from bite.combined_model.train_main_image_to_3d_wbr_withref import do_validation_epoch
+from bite.combined_model.model_shape_v7_withref_withgraphcnn import ModelImageTo3d_withshape_withproj 
 
-from configs.barc_cfg_defaults import get_cfg_defaults, update_cfg_global_with_yaml, get_cfg_global_updated
+from bite.configs.barc_cfg_defaults import get_cfg_defaults, update_cfg_global_with_yaml, get_cfg_global_updated
 
-from lifting_to_3d.utils.geometry_utils import rot6d_to_rotmat, rotmat_to_rot6d  
-from stacked_hourglass.datasets.utils_dataset_selection import get_evaluation_dataset, get_sketchfab_evaluation_dataset, get_crop_evaluation_dataset, get_norm_dict, get_single_crop_dataset_from_image
+from bite.lifting_to_3d.utils.geometry_utils import rot6d_to_rotmat, rotmat_to_rot6d  
+from bite.stacked_hourglass.datasets.utils_dataset_selection import get_evaluation_dataset, get_sketchfab_evaluation_dataset, get_crop_evaluation_dataset, get_norm_dict, get_single_crop_dataset_from_image
 
-from test_time_optimization.bite_inference_model_for_ttopt import BITEInferenceModel
-from smal_pytorch.smal_model.smal_torch_new import SMAL
-from configs.SMAL_configs import SMAL_MODEL_CONFIG
-from smal_pytorch.renderer.differentiable_renderer import SilhRenderer
-from test_time_optimization.utils.utils_ttopt import reset_loss_values, get_optimed_pose_with_glob
+from bite.test_time_optimization.bite_inference_model_for_ttopt import BITEInferenceModel
+from bite.smal_pytorch.smal_model.smal_torch_new import SMAL
+from bite.configs.SMAL_configs import SMAL_MODEL_CONFIG
+from bite.smal_pytorch.renderer.differentiable_renderer import SilhRenderer
+from bite.test_time_optimization.utils.utils_ttopt import reset_loss_values, get_optimed_pose_with_glob
 
-from combined_model.loss_utils.loss_utils import leg_sideway_error, leg_torsion_error, tail_sideway_error, tail_torsion_error, spine_torsion_error, spine_sideway_error
-from combined_model.loss_utils.loss_utils_gc import LossGConMesh, calculate_plane_errors_batch
-from combined_model.loss_utils.loss_arap import Arap_Loss
-from combined_model.loss_utils.loss_laplacian_mesh_comparison import LaplacianCTF     # (coarse to fine animal)
-from graph_networks import graphcmr     # .utils_mesh import Mesh
-from stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
+from bite.combined_model.loss_utils.loss_utils import leg_sideway_error, leg_torsion_error, tail_sideway_error, tail_torsion_error, spine_torsion_error, spine_sideway_error
+from bite.combined_model.loss_utils.loss_utils_gc import LossGConMesh, calculate_plane_errors_batch
+from bite.combined_model.loss_utils.loss_arap import Arap_Loss
+from bite.combined_model.loss_utils.loss_laplacian_mesh_comparison import LaplacianCTF     # (coarse to fine animal)
+from bite.graph_networks import graphcmr     # .utils_mesh import Mesh
+from bite.stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
 
 random.seed(2)
 
@@ -163,7 +165,7 @@ args_workers = 12
 # load configs
 #   step 1: load default configs
 #   step 2: load updates from .yaml file
-path_config = os.path.join(get_cfg_defaults().barc_dir, 'src', 'configs', args_config)
+path_config = os.path.join(get_cfg_defaults().barc_dir, 'bite', 'configs', args_config)
 update_cfg_global_with_yaml(path_config)
 cfg = get_cfg_global_updated()
 
@@ -185,7 +187,7 @@ root_smal_downsampling = os.path.join(root_data_path, 'graphcmr_data')
 # remeshing as used for ground contact
 remeshing_path = os.path.join(root_data_path, 'smal_data_remeshed', 'uniform_surface_sampling', 'my_smpl_39dogsnorm_Jr_4_dog_remesh4000_info.pkl')
 
-loss_weight_path = os.path.join(os.path.dirname(__file__), '../', 'src', 'configs', 'ttopt_loss_weights', args_loss_weight_ttopt_path)  
+loss_weight_path = os.path.join(os.path.dirname(__file__), '../', 'bite', 'configs', 'ttopt_loss_weights', args_loss_weight_ttopt_path)  
 print(loss_weight_path)
 
 

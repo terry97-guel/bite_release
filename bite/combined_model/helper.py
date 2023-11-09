@@ -14,10 +14,10 @@ import trimesh
 
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-from stacked_hourglass.utils.evaluation import accuracy, AverageMeter, final_preds, get_preds, get_preds_soft
-from stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
-from metrics.metrics import Metrics
-from configs.SMAL_configs import EVAL_KEYPOINTS, KEYPOINT_GROUPS
+from bite.stacked_hourglass.utils.evaluation import accuracy, AverageMeter, final_preds, get_preds, get_preds_soft
+from bite.stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
+from bite.metrics.metrics import Metrics
+from bite.configs.SMAL_configs import EVAL_KEYPOINTS, KEYPOINT_GROUPS
 
 
 # GOAL: have all the functions from the validation and visual epoch together

@@ -7,9 +7,9 @@ import torch
 import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
-from src.stacked_hourglass.utils.evaluation import final_preds_untransformed
-from src.stacked_hourglass.utils.imfit import fit, calculate_fit_contain_output_area
-from src.stacked_hourglass.utils.transforms import color_normalize, fliplr, flip_back
+from bite.stacked_hourglass.utils.evaluation import final_preds_untransformed
+from bite.stacked_hourglass.utils.imfit import fit, calculate_fit_contain_output_area
+from bite.stacked_hourglass.utils.transforms import color_normalize, fliplr, flip_back
 
 
 def _check_batched(images):

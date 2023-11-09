@@ -18,14 +18,14 @@ from scipy.spatial.transform import Rotation as R_sc
 
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-from stacked_hourglass.utils.evaluation import accuracy, AverageMeter, final_preds, get_preds, get_preds_soft
-from stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
-from metrics.metrics import Metrics
-from configs.SMAL_configs import EVAL_KEYPOINTS, KEYPOINT_GROUPS, SMAL_KEYPOINT_NAMES_FOR_3D_EVAL, SMAL_KEYPOINT_INDICES_FOR_3D_EVAL, SMAL_KEYPOINT_WHICHTOUSE_FOR_3D_EVAL
-from combined_model.helper import eval_save_visualizations_and_meshes, eval_prepare_pck_and_iou, eval_add_preds_to_summary
+from bite.stacked_hourglass.utils.evaluation import accuracy, AverageMeter, final_preds, get_preds, get_preds_soft
+from bite.stacked_hourglass.utils.visualization import save_input_image_with_keypoints, save_input_image
+from bite.metrics.metrics import Metrics
+from bite.configs.SMAL_configs import EVAL_KEYPOINTS, KEYPOINT_GROUPS, SMAL_KEYPOINT_NAMES_FOR_3D_EVAL, SMAL_KEYPOINT_INDICES_FOR_3D_EVAL, SMAL_KEYPOINT_WHICHTOUSE_FOR_3D_EVAL
+from bite.combined_model.helper import eval_save_visualizations_and_meshes, eval_prepare_pck_and_iou, eval_add_preds_to_summary
 
-from smal_pytorch.smal_model.smal_torch_new import SMAL     # for gc visualization
-from src.combined_model.loss_utils.loss_utils import fit_plane
+from bite.smal_pytorch.smal_model.smal_torch_new import SMAL     # for gc visualization
+from bite.combined_model.loss_utils.loss_utils import fit_plane
 # from src.evaluation.sketchfab_evaluation.alignment_utils.calculate_v2v_error_release import compute_similarity_transform
 # from src.evaluation.sketchfab_evaluation.alignment_utils.calculate_alignment_error import calculate_alignemnt_errors
 
